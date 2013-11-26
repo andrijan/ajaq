@@ -1692,6 +1692,11 @@ struct gclient_s
   //ESJ Heroes stuff
   int points;
   float when;
+  
+  // Clok stuff 
+  int cloak;
+  int cloakrun;
+  int cloakoff;
 };
 
 

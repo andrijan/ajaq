@@ -3319,8 +3319,8 @@ void Pistol_Fire (edict_t * ent)
 	vec3_t start;
 	vec3_t forward, right;
 	vec3_t angles;
-	int damage = 90;
-	int kick = 150;
+	int damage = 0; // default 90
+	int kick = 750; // default 150
 	vec3_t offset;
 	int spread = MK23_SPREAD;
 	int height;

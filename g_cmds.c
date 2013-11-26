@@ -1580,6 +1580,33 @@ void Cmd_Ent_Count_f (edict_t * ent)
 	gi.cprintf (ent, PRINT_HIGH, "%d entities counted\n", x);
 }
 
+
+/*
+=================
+Cloaking
+=================
+*/
+void Cmd_Cloak_f (edict_t *ent) // PSY: IR Goggles
+{
+    if (ent->client->cloak & (!VectorCompare (ent->s.origin, vec3_origin)))
+    {
+        ent->client->cloak = 0;
+        gi.cprintf(ent,PRINT_HIGH,"Cloaking OFF\n");
+        ent->svflags &= ~SVF_NOCLIENT;
+    }
+    else // we're off
+    {
+        ent->client->cloak = 1;
+
+        ent->client->cloakrun = 0;
+
+        ent->client->cloakoff = 0;
+        gi.cprintf(ent,PRINT_HIGH,"Claoking ON\n");
+        gi.sound(ent, CHAN_ITEM, gi.soundindex("floater/fltpain1.wav"), 1, ATTN_NORM, 0);
+        ent->svflags |= SVF_NOCLIENT;
+    }
+}
+
 //SLICER END
 
 /*
@@ -1743,6 +1770,8 @@ void ClientCommand (edict_t * ent)
 		Cmd_Wave_f (ent);
 		return;
 	}
+    else if (Q_stricmp (cmd, "cloak") == 0)
+        Cmd_Cloak_f(ent);
 //zucc
 //      else if (Q_stricmp (cmd, "laser") == 0)
 //              SP_LaserSight (ent);
