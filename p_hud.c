@@ -105,6 +105,9 @@ void MoveClientToIntermission (edict_t * ent)
 	ent->client->ps.fov = 90;
 	ent->client->ps.stats[STAT_SNIPER_ICON] = 0;
 	//FIREBLADE
+    
+    // Cloak 
+    ent->client->cloakrun = 0;
 
 	// add the layout
 
@@ -544,6 +547,8 @@ void G_SetStats (edict_t * ent)
 			ent->client->ps.stats[STAT_ITEMS_ICON] = gi.imageindex (GET_ITEM(HELM_NUM)->icon);
 		else if (INV_AMMO(ent, BAND_NUM))
 			ent->client->ps.stats[STAT_ITEMS_ICON] = gi.imageindex (GET_ITEM(BAND_NUM)->icon);
+		else if (INV_AMMO(ent, JETPACK_NUM))
+			ent->client->ps.stats[STAT_ITEMS_ICON] = gi.imageindex (GET_ITEM(JETPACK_NUM)->icon);
 		else
 			ent->client->ps.stats[STAT_ITEMS_ICON] = 0;
 
@@ -691,9 +696,19 @@ void G_SetStats (edict_t * ent)
 		//
 		// timers
 		//
-        
+        // Cloak 
+        if (ent->client->cloakrun < 1000)
+        {
+            ent->client->ps.stats[STAT_ARMOR_ICON] = gi.imageindex ("p_rebreather");
+            ent->client->ps.stats[STAT_ARMOR] = ent->client->cloakrun/10;
+        }
+		else
+		{
+			ent->client->ps.stats[STAT_ARMOR_ICON] = 0;
+			ent->client->ps.stats[STAT_ARMOR] = 0;
+		}
         // Jetpack
-        if ( Jet_Active(ent) )
+        if (ent->client->Jet_remaining < 50)
         {
             ent->client->ps.stats[STAT_TIMER_ICON] = gi.imageindex ("p_quad");
             ent->client->ps.stats[STAT_TIMER] = ent->client->Jet_remaining/10;

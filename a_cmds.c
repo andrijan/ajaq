@@ -951,6 +951,8 @@ void Cmd_Choose_f(edict_t * ent)
 	else if (!Q_stricmp(s, "grenade launcher") || !Q_stricmp(s, "m4") || !Q_stricmp(s, M4_NAME))
 		itemNum = M4_NUM;
 	else if (!Q_stricmp(s, "laser") || !Q_stricmp(s, LASER_NAME))
+		itemNum = JETPACK_NUM;
+	else if (!Q_stricmp(s, "jetpack") || !Q_stricmp(s, JETPACK_NAME))
 		itemNum = LASER_NUM;
 	else if (!Q_stricmp(s, "vest") || !Q_stricmp(s, KEV_NAME))
 		itemNum = KEV_NUM;
@@ -978,6 +980,7 @@ void Cmd_Choose_f(edict_t * ent)
 		}
 		ent->client->resp.weapon = GET_ITEM(itemNum);
 		break;
+	case JETPACK_NUM:
 	case LASER_NUM:
 	case KEV_NUM:
 	case SLIP_NUM:

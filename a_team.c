@@ -623,6 +623,14 @@ void SelectItem6 (edict_t * ent, pmenu_t * p)
 	unicastSound(ent, gi.soundindex("misc/veston.wav"), 1.0);
 }
 
+void SelectItem7 (edict_t * ent, pmenu_t * p)
+{
+	ent->client->resp.item = GET_ITEM(JETPACK_NUM);
+	PMenu_Close (ent);
+	//PG BUND
+	unicastSound(ent, gi.soundindex("misc/veston.wav"), 1.0);
+}
+
 void CreditsReturnToMain (edict_t * ent, pmenu_t * p)
 {
 	PMenu_Close (ent);
@@ -740,6 +748,7 @@ pmenu_t itemmenu[] = {
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},	// "Silencer", SelectItem4
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},	// "Bandolier", SelectItem5
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},	// "Kevlar Helmet", SelectItem6
+  {NULL, PMENU_ALIGN_LEFT, NULL, NULL},	// "Jetpack", SelectItem7
   //AQ2:TNG end adding itm_flags
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},
   {"Use [ and ] to move cursor", PMENU_ALIGN_LEFT, NULL, NULL},
@@ -1151,7 +1160,8 @@ void OpenItemMenu (edict_t * ent)
 		"Stealth Slippers",
 		"Silencer",
 		"Bandolier",
-		"Kevlar Helmet"
+		"Kevlar Helmet",
+		"Jetpack"
 		};
 	int pos;
 
@@ -1197,6 +1207,12 @@ void OpenItemMenu (edict_t * ent)
 		{
 			itemmenu[pos].text = menu_itemnames[5];
 			itemmenu[pos].SelectFunc = SelectItem6;
+			pos++;
+		}
+		if ((int)itm_flags->value & ITF_JETPACK)
+		{
+			itemmenu[pos].text = menu_itemnames[6];
+			itemmenu[pos].SelectFunc = SelectItem7;
 			pos++;
 		}
 
@@ -1437,6 +1453,7 @@ void CleanLevel ()
 		"weapon_Dual",
 		"weapon_Knife",
 		"weapon_Grenade",
+		"weapon_Proxmine",
 		"ammo_sniper",
 		"ammo_clip",
 		"ammo_mag",
@@ -1446,6 +1463,7 @@ void CleanLevel ()
 		"item_slippers",
 		"item_band",
 		"item_lasersight",
+		"item_jetpack",
 		"item_vest",
 		"thrown_knife",
 		"hgrenade",

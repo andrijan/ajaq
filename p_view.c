@@ -514,8 +514,10 @@ void SV_CalcBlend (edict_t * ent)
         ent->client->Jet_remaining = ent->client->Jet_framenum - level.framenum;
 
         /*if no fuel remaining, remove jetpack from inventory*/ 
+        /*
         if ( ent->client->Jet_remaining == 0 )
             ent->client->pers.inventory[ITEM_INDEX(FindItem("Jetpack"))] = 0;
+        */
 
         /*Play jetting sound every 0.6 secs (sound of monster icarus)*/
         if ( ((int)ent->client->Jet_remaining % 6) == 0 )
@@ -530,7 +532,8 @@ void SV_CalcBlend (edict_t * ent)
         if (ent->client->Jet_remaining > 40 || ( (int)ent->client->Jet_remaining & 4) )
             SV_AddBlend (0, 0, 1, 0.08, ent->client->ps.blend);
     } else {
-        ent->client->Jet_remaining = ent->client->Jet_framenum + level.framenum;
+        if ( ent->client->Jet_remaining < 50 )
+            ent->client->Jet_remaining = ent->client->Jet_framenum + level.framenum;
     }
     if (ent->client->quad_framenum > level.framenum)
 	{

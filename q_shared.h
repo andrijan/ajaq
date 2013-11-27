@@ -1241,7 +1241,6 @@ temp_event_t;
 
 #define MAX_STATS                       32
 
-
 // dmflags->value flags
 #define DF_NO_HEALTH            1
 #define DF_NO_ITEMS             2

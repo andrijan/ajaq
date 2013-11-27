@@ -42,7 +42,7 @@
 
 int tnums[ITEM_COUNT] = {
 	SIL_NUM, SLIP_NUM, BAND_NUM, KEV_NUM, LASER_NUM,
-	HELM_NUM
+	HELM_NUM, JETPACK_NUM
 };
 
 //int tnumspawned[ITEM_COUNT] = { 0 };

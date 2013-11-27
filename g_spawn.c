@@ -1138,7 +1138,6 @@ xl < value > xr < value > yb < value > yt < value > xv < value > yv < value >
     "if 2 "
     "       xv      100 "
     "       anum " "       xv      150 " "       pic 2 " "endif "
-/*
 // armor
 "if 4 "
 "       xv      200 "
@@ -1146,7 +1145,6 @@ xl < value > xr < value > yb < value > yt < value > xv < value > yv < value >
 "       xv      250 "
 "       pic 4 "
 "endif "
-*/
 // selected item
     "if 6 " "       xv      296 " "       pic 6 " "endif " "yb     -50 "
 // picked up item
@@ -1209,7 +1207,6 @@ char *dm_statusbar = "yb     -24 "
   "if 2 "
   "       xv      100 "
   "       anum " "       xv      150 " "       pic 2 " "endif "
-/*
 // armor
 "if 4 "
 "       xv      200 "
@@ -1217,7 +1214,6 @@ char *dm_statusbar = "yb     -24 "
 "       xv      250 "
 "       pic 4 "
 "endif "
-*/
 // selected item
   "if 6 " "       xv      296 " "       pic 6 " "endif " "yb     -50 "
 // picked up item
@@ -1226,7 +1222,6 @@ char *dm_statusbar = "yb     -24 "
   "       pic 7 "
   "       xv      26 "
   "       yb      -42 " "       stat_string 8 " "       yb      -50 " "endif "
-/*
 // timer
 "if 9 "
 "       xv      246 "
@@ -1234,7 +1229,6 @@ char *dm_statusbar = "yb     -24 "
 "       xv      296 "
 "       pic     9 "
 "endif "
-*/
 //  help / weapon icon 
   "if 11 " "       xv      148 " "       pic     11 " "endif "
 // zucc
@@ -1285,7 +1279,6 @@ char *dm_noscore_statusbar = "yb     -24 "
   "if 2 "
   "       xv      100 "
   "       anum " "       xv      150 " "       pic 2 " "endif "
-/*
 // armor
 "if 4 "
 "       xv      200 "
@@ -1293,7 +1286,6 @@ char *dm_noscore_statusbar = "yb     -24 "
 "       xv      250 "
 "       pic 4 "
 "endif "
-*/
 // selected item
   "if 6 " "       xv      296 " "       pic 6 " "endif " "yb     -50 "
 // picked up item
@@ -1302,7 +1294,6 @@ char *dm_noscore_statusbar = "yb     -24 "
   "       pic 7 "
   "       xv      26 "
   "       yb      -42 " "       stat_string 8 " "       yb      -50 " "endif "
-/*
 // timer
 "if 9 "
 "       xv      246 "
@@ -1310,7 +1301,6 @@ char *dm_noscore_statusbar = "yb     -24 "
 "       xv      296 "
 "       pic     9 "
 "endif "
-*/
 //  help / weapon icon 
   "if 11 " "       xv      148 " "       pic     11 " "endif "
 // zucc
@@ -1364,7 +1354,6 @@ char *ctf_statusbar = "yb     -24 "
   "if 2 "
   "       xv      100 "
   "       anum " "       xv      150 " "       pic 2 " "endif "
-/*
 // armor
 "if 4 "
 "       xv      200 "
@@ -1372,7 +1361,6 @@ char *ctf_statusbar = "yb     -24 "
 "       xv      250 "
 "       pic 4 "
 "endif "
-*/
 // selected item
   "if 6 " "       xv      296 " "       pic 6 " "endif " "yb     -50 "
 // picked up item
@@ -1381,7 +1369,6 @@ char *ctf_statusbar = "yb     -24 "
   "       pic 7 "
   "       xv      26 "
   "       yb      -42 " "       stat_string 8 " "       yb      -50 " "endif "
-/*
 // timer
 "if 9 "
 "       xv      246 "
@@ -1389,7 +1376,6 @@ char *ctf_statusbar = "yb     -24 "
 "       xv      296 "
 "       pic     9 "
 "endif "
-*/
 //  help / weapon icon 
   "if 11 " "       xv      148 " "       pic     11 " "endif "
 // zucc

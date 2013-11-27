@@ -98,6 +98,7 @@ void Handle_Unique_Items (edict_t * ent)
 	case KEV_NUM:
 	case HELM_NUM:
 	case LASER_NUM:
+	case JETPACK_NUM:
 		RespawnSpec (ent);
 		break;
 	}

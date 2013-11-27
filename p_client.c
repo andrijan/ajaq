@@ -1490,6 +1490,9 @@ void TossItemsOnDeath(edict_t * ent)
     item = FindItem(LASER_NAME);
     if (ent->client->pers.inventory[ITEM_INDEX(item)])
         EjectItem(ent, item);
+    item = FindItem(JETPACK_NAME);
+    if (ent->client->pers.inventory[ITEM_INDEX(item)])
+        EjectItem(ent, item);
 #endif
 }
 
@@ -3740,6 +3743,27 @@ void ClientThink(edict_t * ent, usercmd_t * ucmd)
 
         if(client->ctf_grapple)
             CTFGrapplePull(client->ctf_grapple);
+
+        if (ent->client->cloak)
+        {
+            if (ent->client->cloakrun > 0)
+            {
+                ent->client->cloakrun--;
+            }
+            else
+            {
+                gi.cprintf(ent,PRINT_HIGH,"Cloaking OFF\n");    
+                ent->svflags &= ~SVF_NOCLIENT;
+                ent->client->cloak = 0;
+            }    
+        }    
+        else 
+        {
+            if (ent->client->cloakrun <= 1000)
+            {
+                ent->client->cloakrun++;
+            }
+        }
 
         if ((pm.cmd.forwardmove != 0) || (pm.cmd.sidemove != 0) || (pm.cmd.upmove >= 10)) {
             ent->client->cloak = 0;

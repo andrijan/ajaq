@@ -126,8 +126,10 @@ void Use_Jet ( edict_t *ent, gitem_t *item )
 
     /*jetpack in inventory but no fuel time? must be one of the
       give all/give jetpack cheats, so put fuel in*/
+    /*
     if ( ent->client->Jet_remaining == 0 )
         ent->client->Jet_remaining = 700;
+    */
 
     if ( Jet_Active(ent) ) 
         ent->client->Jet_framenum = 0; 
@@ -279,6 +281,27 @@ qboolean Pickup_Powerup (edict_t * ent, edict_t * other)
 
 	other->client->pers.inventory[ITEM_INDEX (ent->item)]++;
 
+    // Jetpack
+    if  ( Q_stricmp(ent->item->pickup_name, "Jetpack") == 0 )
+    {
+        other->client->pers.inventory[ITEM_INDEX(ent->item)] = 1;
+        other->client->Jet_remaining = 50;
+
+        /*if deathmatch-flag instant use is set, switch off
+         * the jetpack, 
+         *       the item->use function will turn it on again
+         *       immediately*/
+        if ( (int)dmflags->value & DF_INSTANT_ITEMS )
+            other->client->Jet_framenum = 0;
+
+        /*otherwise update the burn out time if jetpack is
+         * activated*/
+        else 
+            if ( Jet_Active(other) )
+                other->client->Jet_framenum = level.framenum + other->client->Jet_remaining;
+
+
+    }
 	if (deathmatch->value)
 	{
 		if (!(ent->spawnflags & DROPPED_ITEM))
@@ -491,6 +514,8 @@ void DropSpecialItem (edict_t * ent)
 		Drop_Special (ent, GET_ITEM(HELM_NUM));
 	else if (INV_AMMO(ent, KEV_NUM))
 		Drop_Special (ent, GET_ITEM(KEV_NUM));
+	else if (INV_AMMO(ent, JETPACK_NUM))
+		Drop_Special (ent, GET_ITEM(JETPACK_NUM));
 }
 
 
@@ -1449,6 +1474,7 @@ void PrecacheItems ()
 	PrecacheItem(FindItemByClassname("item_vest"));
 	PrecacheItem(FindItemByClassname("item_helmet"));
 	PrecacheItem(FindItemByClassname("item_bandolier"));
+	PrecacheItem(FindItemByClassname("item_jetpack"));
 
 	if (ctf->value) {
 		PrecacheItem(FindItemByClassname("item_flag_team1"));
@@ -1584,6 +1610,12 @@ void SpawnItem (edict_t * ent, gitem_t * item)
 		break;
 	case LASER_NUM:
 		if (!((int)itm_flags->value & ITF_LASER)) {
+			G_FreeEdict (ent);
+			return;
+		}
+		break;
+	case JETPACK_NUM:
+		if (!((int)itm_flags->value & ITF_JETPACK)) {
 			G_FreeEdict (ent);
 			return;
 		}
@@ -2378,7 +2410,7 @@ world_model_flags int               copied to 'ent->s.effects' (see s.effects fo
    "models/items/keys/red_key/tris.md2",
    0,
    "models/weapons/v_flareg/tris.md2",
-   "a_prox",
+   "a_m61frag",
    PROXMINE_NAME,
    0,
    0,
@@ -2749,6 +2781,28 @@ world_model_flags int               copied to 'ent->s.effects' (see s.effects fo
    LASER_NUM
    }
   ,
+  {
+   "item_jetpack",
+   Pickup_Special,
+   Use_Jet,			//SP_LaserSight,
+   Drop_Special,
+   NULL,
+   "misc/lasersight.wav",	// sound
+   "models/items/invulner/tris.md2", 
+   0,
+   NULL,
+   /* icon */ "p_invulnerability",
+   /* pickup */ "Jetpack",
+   /* width */ 2,
+   60,
+   NULL,
+   IT_ITEM,
+   NULL,
+   0,
+   /* precache */ "",
+   JETPACK_NUM
+   }
+  ,
 
 
 /*QUAKED item_quad (.3 .3 1) (-16 -16 -16) (16 16 16)
@@ -2760,7 +2814,7 @@ world_model_flags int               copied to 'ent->s.effects' (see s.effects fo
    Drop_General,
    NULL,
    "items/pkup.wav",
-   "models/items/hover/tris.md2", EF_ROTATE,
+   "models/items/quaddama/tris.md2", EF_ROTATE,
    NULL,
 /* icon */ "p_quad",
 /* pickup */ "Quad Damage",
@@ -2770,7 +2824,7 @@ world_model_flags int               copied to 'ent->s.effects' (see s.effects fo
    0,
    NULL,
    0,
-/* precache */ "items/damage.wav items/damage2.wav items/damage3.wav"
+/* precache */ "hover/hovidle1.wav items/damage.wav items/damage2.wav items/damage3.wav"
    }
   ,
 
@@ -3395,6 +3449,7 @@ void InitItems (void)
 	items[KEV_NUM].flag = ITF_KEV;
 	items[LASER_NUM].flag = ITF_LASER;
 	items[HELM_NUM].flag = ITF_HELM;
+	items[JETPACK_NUM].flag = ITF_JETPACK;
 }
 
 

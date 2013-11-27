@@ -1588,7 +1588,7 @@ Cloaking
 */
 void Cmd_Cloak_f (edict_t *ent) // PSY: IR Goggles
 {
-    if (ent->client->cloak & (!VectorCompare (ent->s.origin, vec3_origin)))
+    if (ent->client->cloak)
     {
         ent->client->cloak = 0;
         gi.cprintf(ent,PRINT_HIGH,"Cloaking OFF\n");
@@ -1598,10 +1598,10 @@ void Cmd_Cloak_f (edict_t *ent) // PSY: IR Goggles
     {
         ent->client->cloak = 1;
 
-        ent->client->cloakrun = 0;
+        //ent->client->cloakrun = 0;
 
         ent->client->cloakoff = 0;
-        gi.cprintf(ent,PRINT_HIGH,"Claoking ON\n");
+        gi.cprintf(ent,PRINT_HIGH,"Cloaking ON\n");
         gi.sound(ent, CHAN_ITEM, gi.soundindex("floater/fltpain1.wav"), 1, ATTN_NORM, 0);
         ent->svflags |= SVF_NOCLIENT;
     }

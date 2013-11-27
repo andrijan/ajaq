@@ -1986,6 +1986,7 @@ void AddSplat (edict_t * self, vec3_t point, trace_t * tr);
 #define KEV_NAME     "Kevlar Vest"
 #define HELM_NAME    "Kevlar Helmet"
 #define LASER_NAME   "Lasersight"
+#define JETPACK_NAME   "Jetpack"
 
 //AQ2:TNG - Igor adding wp_flags/itm_flags
 #define WPF_MK23      0x00000001
@@ -2005,6 +2006,7 @@ void AddSplat (edict_t * self, vec3_t point, trace_t * tr);
 #define ITF_KEV       0x00000008
 #define ITF_LASER     0x00000010
 #define ITF_HELM      0x00000020
+#define ITF_JETPACK   0x00000040
 //AQ2:TNG End adding flags
 
 #define NO_NUM					-1
@@ -2026,21 +2028,21 @@ void AddSplat (edict_t * self, vec3_t point, trace_t * tr);
 #define KEV_NUM					13
 #define LASER_NUM				14
 #define HELM_NUM				15
+#define JETPACK_NUM				16
 
-#define MK23_ANUM				16
-#define MP5_ANUM				17
-#define M4_ANUM					18
-#define SHELL_ANUM				19
-#define SNIPER_ANUM				20
+#define MK23_ANUM				17
+#define MP5_ANUM				18
+#define M4_ANUM					19
+#define SHELL_ANUM				20
+#define SNIPER_ANUM				21
 
-#define FLAG_T1_NUM				21
-#define FLAG_T2_NUM				22
+#define FLAG_T1_NUM				22
+#define FLAG_T2_NUM				23
 
-#define GRAPPLE_NUM				23
-#define JETPACK_NUM				24
+#define GRAPPLE_NUM				24
 
 #define WEAPON_COUNT			10
-#define ITEM_COUNT				6
+#define ITEM_COUNT				7
 #define AMMO_COUNT				5
 #define ILIST_COUNT				WEAPON_COUNT+ITEM_COUNT+AMMO_COUNT
 
