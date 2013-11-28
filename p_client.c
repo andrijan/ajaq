@@ -2715,12 +2715,14 @@ void EquipClientDM(edict_t * ent)
         client->pers.inventory[client->pers.selected_item] = tgren->value;
         client->pers.weapon = item;
         client->curr_weap = GRENADE_NUM;
+        /*
     } else if (Q_stricmp(strtwpn->string, PROXMINE_NAME) == 0) {
         item = GET_ITEM(PROXMINE_NUM);
         client->pers.selected_item = ITEM_INDEX(item);
         client->pers.inventory[client->pers.selected_item] = proxmine->value;
         client->pers.weapon = item;
         client->curr_weap = PROXMINE_NUM;
+        */
     } else if (Q_stricmp(strtwpn->string, KNIFE_NAME) == 0) {
         item = GET_ITEM(KNIFE_NUM);
         client->pers.selected_item = ITEM_INDEX(item);
@@ -3606,10 +3608,13 @@ void ClientThink(edict_t * ent, usercmd_t * ucmd)
         return;
     }
     pm_passent = ent;
+
     if (ent->groundentity)
         ent->timestamp = level.time;
 
     //gi.centerprintf(ent, "%s", ent->groundentity);
+    gi.cprintf(ent, PRINT_HIGH, "Numtouch: %d\n", pm.numtouch);
+
     if (!ent->groundentity && ucmd->upmove > 10 && !ent->dbljumped)
     {
         if (level.time - ent->timestamp >= 0.35) // Time after jump to dbl-jump
@@ -3622,7 +3627,7 @@ void ClientThink(edict_t * ent, usercmd_t * ucmd)
         }
     }
 
-    if (ent->groundentity && ent->dbljumped == true)
+    if ((ent->groundentity || pm.numtouch == 4) && ent->dbljumped == true)
         ent->dbljumped = false;
 
     // FROM 3.20 -FB
